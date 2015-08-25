@@ -3,16 +3,22 @@ FROM php:5-apache
 MAINTAINER David Forster <david@davidforster.com>
 
 # Install libxslt, zlib and Git
-RUN apt-get update && apt-get install -y libxslt1-dev zlib1g-dev git
+RUN apt-get update && apt-get install -y \
+    git \
+    libxslt1-dev \
+    zlib1g-dev
 
 # enable mysqli, xsl and zlib PHP modules
-RUN docker-php-ext-install mysqli xsl zip
+RUN docker-php-ext-install \
+    mysqli \
+    xsl \
+    zip
 
 # enable mod_rewrite
 RUN a2enmod rewrite
 
 # install the php.ini file
-ADD ["php.ini", "/usr/local/etc/php/"]
+COPY ["php.ini", "/usr/local/etc/php/"]
 
 WORKDIR /var/www/html/
 
