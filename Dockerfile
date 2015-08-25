@@ -2,8 +2,6 @@ FROM php:5-apache
 
 MAINTAINER David Forster <david@davidforster.com>
 
-ENV version 2.6.3
-
 # Install libxslt, zlib and Git
 RUN apt-get update && apt-get install -y libxslt1-dev zlib1g-dev git
 
@@ -18,9 +16,7 @@ ADD ["php.ini", "/usr/local/etc/php/"]
 
 WORKDIR /var/www/html/
 
-#curl -L https://github.com/symphonycms/symphony-2/archive/${version}.tar.gz | tar -zx -C /usr/src
-
-# Clone and install Symphony
+# Clone Symphony, it's submodules and the sample workspace
 RUN git clone git://github.com/symphonycms/symphony-2.git .
 RUN git checkout --track origin/bundle
 RUN git submodule update --init --recursive
