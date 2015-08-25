@@ -4,11 +4,11 @@ MAINTAINER David Forster <david@davidforster.com>
 
 ENV version 2.6.3
 
-# Install libxslt and Git
-RUN apt-get update && apt-get install -y libxslt1-dev git
+# Install libxslt, zlib and Git
+RUN apt-get update && apt-get install -y libxslt1-dev zlib1g-dev git
 
-# enable mysqli and xsl PHP modules
-RUN docker-php-ext-install mysqli xsl
+# enable mysqli, xsl and zlib PHP modules
+RUN docker-php-ext-install mysqli xsl zip
 
 # enable mod_rewrite
 RUN a2enmod rewrite
