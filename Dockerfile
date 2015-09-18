@@ -20,8 +20,10 @@ RUN a2enmod rewrite
 # install the php.ini file
 COPY ["php.ini", "/usr/local/etc/php/"]
 
+RUN rm -rf /var/www/html
+
 # Clone Symphony, it's submodules and the sample workspace
-RUN rm -rf /var/www/html && git clone git://github.com/symphonycms/symphony-2.git /var/www/html \
+RUN git clone git://github.com/symphonycms/symphony-2.git /var/www/html \
     && git checkout --track origin/bundle \
     && git submodule update --init --recursive \
     && git clone git://github.com/symphonycms/workspace.git \
