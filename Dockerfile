@@ -6,6 +6,8 @@ RUN apt-get update \
         git \
         libxslt1-dev \
         zlib1g-dev \
+    && apt-get clean \
+    && apt-get autoremove \
     && rm -r /var/lib/apt/lists/*
 
 # enable mysqli, xsl and zlib PHP modules
