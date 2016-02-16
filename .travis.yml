@@ -1,0 +1,9 @@
+services:
+  - docker
+
+install:
+  - docker build -t symphonycms .
+  - docker run -d -p 127.0.0.1:80:80 --name symphonycms symphonycms
+
+script:
+  - docker ps | grep -q symphonycms
