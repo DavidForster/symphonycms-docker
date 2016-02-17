@@ -18,7 +18,7 @@ Symphony stores data in a MySQL (or compatible) database, so you need have one o
         -e MYSQL_USER=<dbusername> \
         -e MYSQL_PASSWORD=<dbpassword> \
         -p 3306:3306 \
-        --name symphony-db \
+        --name symphonydb \
         mariadb
 
 ### Running
@@ -27,9 +27,9 @@ Once you have a MySQL database container up and running, you can start the Symph
 
     docker run \
         -d \
-        --link symphony-db \
+        --link symphonydb \
         -p 80:80 \
-        --name symphony-cms \
-        davidforster/symphony-cms
+        --name symphonycms \
+        davidforster/symphonycms
 
 You should then be able to access apache and be redirected to the Symphony installation page by browsing to the IP address of your docker server.
