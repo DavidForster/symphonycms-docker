@@ -1,11 +1,11 @@
-FROM php:5-apache
+FROM php:7-apache
 
 # Install libxslt, zlib and Git
 RUN apt-get update \
     && apt-get install -y \
         git \
         libxslt1-dev \
-        zlib1g-dev \
+        libzip-dev \
     && apt-get clean \
     && apt-get autoremove \
     && rm -r /var/lib/apt/lists/*
@@ -20,8 +20,7 @@ RUN docker-php-ext-install \
 RUN a2enmod rewrite
 
 # Clone Symphony, it's submodules and the sample workspace
-RUN git clone git://github.com/symphonycms/symphony-2.git /var/www/html \
-    && git checkout --track origin/bundle \
-    && git submodule update --init --recursive \
-    && git clone git://github.com/symphonycms/workspace.git \
+RUN git clone --branch 2.7.10 --depth 1 https://github.com/symphonycms/symphonycms.git /var/www/html \
+    # && git submodule update --init --recursive \
+    && git clone --depth 1 https://github.com/symphonycms/workspace.git \
     && chown -R www-data:www-data *
